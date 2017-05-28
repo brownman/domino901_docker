@@ -20,11 +20,8 @@ COPY ${DOM_CONF}/ /tmp/sw-repo/serverconfig
 
 RUN mkdir -p /tmp/sw-repo/ && \
     cd /tmp/sw-repo/ && \
-    wget -q http://ubuntu02.local:7777/DOMINO_9.0.1_64_BIT_LIN_XS_EN.tar && \
-    tar -xf DOMINO_9.0.1_64_BIT_LIN_XS_EN.tar &&\
-    /bin/bash -c "/tmp/sw-repo/linux64/domino/install -silent -options /tmp/sw-repo/serverconfig/domino901_response.dat" && \
-    cd / && \
-    rm /tmp/* -R
+    /bin/bash -c "/tmp/linux64/domino/install -silent -options /tmp/sw-repo/serverconfig/domino901_response.dat" && \
+    cd /
 
 RUN mkdir -p /etc/sysconfig/
 COPY ${DOM_SCR}/rc_domino /etc/init.d/
