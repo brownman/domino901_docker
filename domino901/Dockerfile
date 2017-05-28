@@ -4,8 +4,7 @@ ENV DOM_SCR=resources/initscripts
 ENV DOM_CONF=resources/serverconfig
 
 RUN apt-get update && \
-    apt-get install -y nano && \
-    apt-get install -y wget && \
+    apt-get install -y vim && \
     apt-get clean
 
 RUN useradd -ms /bin/bash notes && \
@@ -17,10 +16,10 @@ RUN useradd -ms /bin/bash notes && \
     echo '# End of file' >> /etc/security/limits.conf
 
 COPY ${DOM_CONF}/ /tmp/sw-repo/serverconfig
-
+ADD linux64 /tmp/linux64
 RUN mkdir -p /tmp/sw-repo/ && \
     cd /tmp/sw-repo/ && \
-    /bin/bash -c "/tmp/linux64/domino/install -silent -options /tmp/sw-repo/serverconfig/domino901_response.dat" && \
+    /bin/bash -c "/tmp/linux64/DominoEval/install -silent -options /tmp/sw-repo/serverconfig/domino901_response.dat" && \
     cd /
 
 RUN mkdir -p /etc/sysconfig/
